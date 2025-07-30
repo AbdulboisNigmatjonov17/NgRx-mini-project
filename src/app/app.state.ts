@@ -1,5 +1,5 @@
-import { Car } from "./models/car";
+import { CarState } from "./cars/car.reducer";
 
 export interface AppState {
-    readonly car: Car[];
+    readonly cars: CarState;
 }

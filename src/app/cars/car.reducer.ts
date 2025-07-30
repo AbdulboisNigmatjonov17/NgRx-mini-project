@@ -1,11 +1,20 @@
 import { createReducer, on } from "@ngrx/store";
 import { Car } from "../models/car";
-import { AddCar, RemoveCar } from "./car.action";
+import { AddCar, LoadCars, loadCarsFailure, loadCarsSuccess, RemoveCar } from "./car.action";
 
-export const initialState: Car[] = [];
+export interface CarState {
+    cars: Car[];
+    loading: boolean;
+    error: any;
+}
 
-export const CarReducer = createReducer(
-    initialState,
-    on(AddCar, (state, {brand, model, id, price, prviewImage}) => [...state, { brand, model, id, price, prviewImage }]),
-    on(RemoveCar, (state, action) => state.filter(car => car.id !== action.id))
+export const initialState: CarState = {
+    cars: [],
+    loading: false,
+    error: null
+};
+
+export const CarReducer = createReducer(initialState, on(LoadCars, (state) => ({ ...state, loading: true, error: null })),
+    on(loadCarsSuccess, (state, action) => ({ ...state, loading: false, cars: action.cars })),
+    on(loadCarsFailure, (state, action) => ({ ...state, loading: false, error: action.error })),
 )
