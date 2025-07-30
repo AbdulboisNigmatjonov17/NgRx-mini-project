@@ -6,6 +6,6 @@ export const initialState: Car[] = [];
 
 export const CarReducer = createReducer(
     initialState,
-    on(AddCar, (state, action) => [...state, { id: action.id, model: action.model, color: action.color }]),
+    on(AddCar, (state, {brand, model, id, price, prviewImage}) => [...state, { brand, model, id, price, prviewImage }]),
     on(RemoveCar, (state, action) => state.filter(car => car.id !== action.id))
 )

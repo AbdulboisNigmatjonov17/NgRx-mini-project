@@ -1,25 +1,25 @@
 <h4 class="mb-3">Add a new Car</h4>
 
-<form>
+<form [formGroup]="carForm" (ngSubmit)="onSubmit()">
     <div class="form-floating mb-3">
-        <input type="text" name="brand" id="brand" class="form-control" placeholder="Toyota">
+        <input type="text" formControlName="brand" id="brand" class="form-control" placeholder="Toyota">
         <label for="brand">Brand</label>
     </div>
 
     <div class="form-floating mb-3">
-        <input type="text" name="brand" id="brand" class="form-control" placeholder="Model">
+        <input type="text" formControlName="model" id="model" class="form-control" placeholder="Model">
         <label for="model">Model</label>
     </div>
 
     <div class="form-floating mb-3">
-        <input type="number" name="price" id="price" class="form-control" placeholder="100 UCD">
+        <input type="number" formControlName="price" id="price" class="form-control" placeholder="100 UCD">
         <label for="price">Price per day</label>
     </div>
 
     <div class="form-floating mb-3">
-        <input type="еуче" name="image" id="image" class="form-control" placeholder="Image URL">
-        <label for="price">Preview image</label>
+        <input type="text" formControlName="previewImage" id="image" class="form-control" placeholder="Image URL">
+        <label for="image">Preview image</label>
     </div>
 
-    <button type="submit" class="btn btn-primary w-100 btn-lg">Submit</button>
+    <button type="submit" class="btn btn-primary w-100 btn-lg" [disabled]="carForm.invalid">Submit</button>
 </form>

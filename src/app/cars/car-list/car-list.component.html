@@ -1,11 +1,21 @@
 <h4>Car list</h4>
 
-<div class="card mb-3 shadow-sm overflow-hidden">
-    <img src="https://www.solido.com/wp-content/uploads/2022/05/toyota-supra-mk4-a80-renaissance-red-1993-01.jpg" alt=""
-        class="card-img-top">
-    <div class="card-body">
-        <h5 class="card-title">Toyota, Supra</h5>
-        <p class="card-text text-muted">100 USD / day</p>
-        <button class="btn btn-danger w-100">Delete</button>
+@if (cars().length) {
+<div>
+
+    @for (item of cars(); track item.id) {
+    <div class="card mb-3 shadow-sm overflow-hidden">
+        <img [src]="item.prviewImage" [alt]="item.model" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">{{item.brand}} {{item.model}}</h5>
+            <p class="card-text text-muted">{{item.price | currency}} / day</p>
+            <button class="btn btn-danger w-100" (click)="onDelete(item.id)">Delete</button>
+        </div>
     </div>
+    }
 </div>
+} @else {
+<div class="alert alert-warning" role="alert">
+    No cars found
+</div>
+}
