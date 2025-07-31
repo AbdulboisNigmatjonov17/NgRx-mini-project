@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectCars, selectError, selectLoading } from '../car.selector';
 import { CurrencyPipe } from '@angular/common';
-import { LoadCars, RemoveCar } from '../car.action';
+import { LoadCars, removeCarSuccess } from '../car.action';
 
 @Component({
   selector: 'app-car-list',
@@ -19,6 +19,9 @@ export class CarListComponent implements OnInit{
 
   ngOnInit(): void {
     this.store.dispatch(LoadCars())
+  }
+  onRemove(id: string) {
+    this.store.dispatch(removeCarSuccess({ id }))
   }
 }
 // private store = inject(Store)

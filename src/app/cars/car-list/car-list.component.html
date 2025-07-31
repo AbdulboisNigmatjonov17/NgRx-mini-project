@@ -24,7 +24,7 @@
         <div class="card-body">
             <h5 class="card-title">{{item.brand}} {{item.model}}</h5>
             <p class="card-text text-muted">{{item.price | currency}} / day</p>
-            <button class="btn btn-danger w-100">Delete</button>
+            <button class="btn btn-danger w-100" (click)="onRemove(item.id)">Delete</button>
         </div>
     </div>
     }

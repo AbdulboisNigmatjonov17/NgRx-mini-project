@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { selectCars } from '../car.selector';
+import { selectCars, selectError, selectLoading } from '../car.selector';
 import { Car } from '../../models/car';
-import { AddCar } from '../car.action';
+import { addCar } from '../car.action';
 
 @Component({
   selector: 'app-car-form',
@@ -14,7 +14,9 @@ import { AddCar } from '../car.action';
 export class CarFormComponent {
   private store = inject(Store)
   
-  cars = this.store.selectSignal(selectCars);
+  cars = this.store.selectSignal(selectCars)
+  loading = this.store.selectSignal(selectLoading)
+  error = this.store.selectSignal(selectError)
 
   carForm = new FormGroup({
     brand: new FormControl('', Validators.required),
@@ -33,7 +35,7 @@ export class CarFormComponent {
         price: +formValue.price!,
         prviewImage: formValue.previewImage!
       }
-      this.store.dispatch(AddCar(newCar));
+      this.store.dispatch(addCar({ car: newCar }));
       this.carForm.reset();
     }
   }
